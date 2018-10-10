@@ -3,20 +3,43 @@
   <head>  
   <title>视频直播</title>  
   <meta charset="utf-8">  
-  <link href="http://vjs.zencdn.net/5.5.3/video-js.css" rel="stylesheet">  
+  <link href="video-js.css" rel="stylesheet">  
   <!-- If you'd like to support IE8 -->  
-  <script src="http://vjs.zencdn.net/ie8/1.1.1/videojs-ie8.min.js"></script>  
+  <script src="videojs-ie8.min.js"></script>  
 </head>  
 <body>  
   <h1>直播测试</h1>  
  <video id="my-video" class="video-js" controls preload="auto" width="640" height="300"  
  poster="" data-setup="{}">  
-    <source src="rtmp://39.104.80.85:88/live/3a4007fecad411e8bc7500163e001f02" type="rtmp/flv">  
+    <source src="rtmp://39.104.80.85:88/live/567074eccc6211e8bc7500163e001f02" type="rtmp/flv">  
     <p class="vjs-no-js">播放视频需要启用 JavaScript，推荐使用支持HTML5的浏览器访问。  
       To view this video please enable JavaScript, and consider upgrading to a web browser that  
       <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>  
     </p>  
  </video>  
- <script src="http://vjs.zencdn.net/5.5.3/video.js"></script>  
+ <script src="video.js"></script>  
+ <script type="text/javascript">
+  var playShow = false;
+   var player = videojs("my-video", {
+    "autoplay":true
+    }, function(){
+        this.on('loadeddata',function(){
+            console.log(this)
+            playShow = true;
+        })
+
+        this.on('ended',function(){
+             this.pause();
+             this.hide()
+        })
+
+    });
+   setTimeout(function(){
+    console.log(playShow)
+    if(!playShow){
+      // window.location.reload();
+    }
+   },3000)
+ </script>
 </body>  
 </html> 
